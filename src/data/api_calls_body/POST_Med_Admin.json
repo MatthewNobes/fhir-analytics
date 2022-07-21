@@ -1,0 +1,24 @@
+{
+	"resourceType": "MedicationAdministration",
+	"id": "davetakesinsulin",
+	"text": {
+		"status": "generated",
+		"div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p></p></div>"
+	},
+	"subject": { "reference": "Patient/dbb836b5-49b3-4c8b-9e1b-dcdd51a7de72" },
+	"status": "completed",
+	"medicationReference": {
+		"reference": "4aa3a72b-826f-41fd-b0fc-346867f32035"
+	},
+	"dosage": {
+		"route": {
+			"coding": [
+				{
+					"system": "http://snomed.info/sct",
+					"code": "67866001",
+					"display": "Insulin (substance)"
+				}
+			]
+		}
+	}
+}

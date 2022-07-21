@@ -1,0 +1,30 @@
+{
+	"resourceType": "Medication",
+
+	"identifier": ["Insulin"],
+	"code": {
+		"coding": [
+			{
+				"system": "http://snomed.info/sct",
+				"code": "67866001",
+				"display": "Insulin (substance)"
+			}
+		]
+	},
+	"status": "active",
+	"manufacturer": "",
+	"form": "tablets",
+	"amount": "10:1",
+	"ingredient": [
+		{
+			"itemCodeableConcept": "{ CodeableConcept }",
+			"itemReference": "{ Reference(Medication|Substance) }",
+			"isActive": true,
+			"strength": "10:1"
+		}
+	],
+	"batch": {
+		"lotNumber": "122",
+		"expirationDate": "2001-03-18"
+	}
+}
