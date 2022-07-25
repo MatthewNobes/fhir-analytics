@@ -68,7 +68,8 @@
 	<div>
 		<button on:click={getAllPatients}>Get all patients</button>
 		<button on:click={getPatient}>Get a patient</button>
-		<label>Insert name: </label><input bind:value={searchName} />
+		<label htmlfor="patient-search-name">Insert name: </label>
+		<input id="patient-search-name" type="text" bind:value={searchName} />
 	</div>
 	<button on:click={getAllMedicationAdministrations}>Get all medication administrations</button>
 	<button on:click={getAllMedication}>Get all medication</button>
