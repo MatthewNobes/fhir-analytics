@@ -1,98 +1,61 @@
 <script>
-	import { stringifyResults } from '../utils/stringifyResults';
-	let value = `Called Requests:\n\n`;
+	import { apiRequest } from '../data/apiRequest';
+
+	let responseLog = `Called Requests:\n\n`;
 	let searchName = 'Smith';
 
-	const getAllPatients = () => {
-		fetch('http://localhost:4444/Patients/allPatients')
-			.then((response) => response.json())
-			.then((data) => {
-				let entry = 'Request for All Patients:\n';
-				entry += stringifyResults(data.entry);
-
-				value += entry;
-			});
+	const getAllPatients = async () => {
+		const requestTitle = '- Request for All Patients:\n';
+		const response = await apiRequest('Patients/allPatients');
+		responseLog += requestTitle + response;
 	};
 
-	const getPatient = () => {
-		fetch('http://localhost:4444/Patients/paitent/' + searchName)
-			.then((response) => response.json())
-			.then((data) => {
-				let entry = 'Request for a patient with the name "' + searchName + '":\n';
-				entry += stringifyResults(data.entry);
-
-				value += entry;
-			});
+	const getPatient = async () => {
+		const requestTitle = '- Request for a patient with the name "' + searchName + '":\n';
+		const response = await apiRequest('Patients/paitent/' + searchName);
+		responseLog += requestTitle + response;
 	};
 
-	const getAllMedication = () => {
-		fetch('http://localhost:4444/medication/')
-			.then((response) => response.json())
-			.then((data) => {
-				let entry = 'Request for all medication:\n';
-				entry += stringifyResults(data.entry);
-				value += entry;
-			});
+	const getAllMedication = async () => {
+		const requestTitle = '- Request for all medication:\n';
+		const response = await apiRequest('medication');
+		responseLog += requestTitle + response;
 	};
 
-	const getAllAppointments = () => {
-		fetch('http://localhost:4444/appointments/')
-			.then((response) => response.json())
-			.then((data) => {
-				let entry = 'Request for all appointments:\n';
-				entry += stringifyResults(data.entry);
-				value += entry;
-			});
+	const getAllAppointments = async () => {
+		const requestTitle = '- Request for all appointments:\n';
+		const response = await apiRequest('appointments');
+		responseLog += requestTitle + response;
 	};
 
-	const getAllImmunisations = () => {
-		fetch('http://localhost:4444/immunisations/')
-			.then((response) => response.json())
-			.then((data) => {
-				let entry = 'Request for all immunisations:\n';
-				entry += stringifyResults(data.entry);
-				value += entry;
-			});
+	const getAllImmunisations = async () => {
+		const requestTitle = '- Request for all immunisations:\n';
+		const response = await apiRequest('immunisations');
+		responseLog += requestTitle + response;
 	};
 
-	const getAllConditions = () => {
-		fetch('http://localhost:4444/conditions/')
-			.then((response) => response.json())
-			.then((data) => {
-				let entry = 'Request for all conditions:\n';
-				entry += stringifyResults(data.entry);
-				value += entry;
-			});
+	const getAllConditions = async () => {
+		const requestTitle = '- Request for all conditions:\n';
+		const response = await apiRequest('conditions');
+		responseLog += requestTitle + response;
 	};
 
-	const getAllMedicationAdministrations = () => {
-		fetch('http://localhost:4444/medicationAdministrations/')
-			.then((response) => response.json())
-			.then((data) => {
-				let entry = 'Request for all Medication Administrations:\n';
-				entry += stringifyResults(data.entry);
-				value += entry;
-			});
+	const getAllMedicationAdministrations = async () => {
+		const requestTitle = '- Request for all Medication Administrations:\n';
+		const response = await apiRequest('medicationAdministrations');
+		responseLog += requestTitle + response;
 	};
 
-	const getAllDiagnosticReports = () => {
-		fetch('http://localhost:4444/diagnosticReports/')
-			.then((response) => response.json())
-			.then((data) => {
-				let entry = 'Request for all Diagnostic Reports:\n';
-				entry += stringifyResults(data.entry);
-				value += entry;
-			});
+	const getAllDiagnosticReports = async () => {
+		const requestTitle = '- Request for all Diagnostic Reports:\n';
+		const response = await apiRequest('diagnosticReports');
+		responseLog += requestTitle + response;
 	};
 
-	const getAllSpecimens = () => {
-		fetch('http://localhost:4444/specimens/')
-			.then((response) => response.json())
-			.then((data) => {
-				let entry = 'Request for all specimens:\n';
-				entry += stringifyResults(data.entry);
-				value += entry;
-			});
+	const getAllSpecimens = async () => {
+		const requestTitle = '- Request for all specimens:\n';
+		const response = await apiRequest('specimens');
+		responseLog += requestTitle + response;
 	};
 </script>
 
@@ -113,7 +76,7 @@
 	<button on:click|once={getAllSpecimens}>Get all Specimens</button>
 </div>
 
-<textarea bind:value readonly />
+<textarea bind:value={responseLog} readonly />
 
 <style>
 	textarea {
