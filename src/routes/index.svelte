@@ -74,6 +74,16 @@
 				value += entry;
 			});
 	};
+
+	const getAllDiagnosticReports = () => {
+		fetch('http://localhost:4444/diagnosticReports/')
+			.then((response) => response.json())
+			.then((data) => {
+				let entry = 'Request for all Diagnostic Reports:\n';
+				entry += stringifyResults(data.entry);
+				value += entry;
+			});
+	};
 </script>
 
 <h1>FHIR Server Analytics</h1>
@@ -89,7 +99,8 @@
 	<button on:click|once={getAllAppointments}>Get all Appointments</button>
 	<button on:click|once={getAllImmunisations}>Get all Immunisations</button>
 	<button on:click|once={getAllConditions}>Get all Conditions</button>
-	<!---also need medication administration, diagnostic reprots, specimen (test result)-->
+	<button on:click|once={getAllDiagnosticReports}>Get all Diagnostic Reports</button>
+	<!---also need diagnostic reprots, specimen (test result)-->
 </div>
 
 <textarea bind:value readonly />
