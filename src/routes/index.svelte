@@ -1,8 +1,9 @@
 <script>
+	import { stringifyResults } from '../utils/stringifyResults';
 	let value = `Called Requests:\n\n`;
 	let searchName = 'Smith';
 
-	function getAllPatients() {
+	const getAllPatients = () => {
 		fetch('http://localhost:4444/Patients/allPatients')
 			.then((response) => response.json())
 			.then((data) => {
@@ -11,9 +12,9 @@
 
 				value += entry;
 			});
-	}
+	};
 
-	function getPatient() {
+	const getPatient = () => {
 		fetch('http://localhost:4444/Patients/paitent/' + searchName)
 			.then((response) => response.json())
 			.then((data) => {
@@ -22,15 +23,7 @@
 
 				value += entry;
 			});
-	}
-
-	function stringifyResults(results) {
-		let allResults = '';
-		results.forEach((result, index) => {
-			allResults += 'Entry ' + index + ':' + JSON.stringify(result) + '\n\n';
-		});
-		return allResults;
-	}
+	};
 
 	const getAllMedication = () => {
 		fetch('http://localhost:4444/medication/')
