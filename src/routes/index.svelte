@@ -57,31 +57,36 @@
 		const response = await apiRequest('specimens');
 		responseLog += requestTitle + response;
 	};
+
+	const clearConsole = () => {
+		responseLog = `Called Requests:\n\n`;
+	};
 </script>
 
 <h1>FHIR Server Analytics</h1>
 <div class="buttonPanel">
 	<div>
-		<button on:click|once={getAllPatients}>Get all patients</button>
-		<button on:click|once={getPatient}>Get a patient</button>
+		<button on:click={getAllPatients}>Get all patients</button>
+		<button on:click={getPatient}>Get a patient</button>
 		<label>Insert name: </label><input bind:value={searchName} />
 	</div>
-	<button on:click|once={getAllMedicationAdministrations}>Get all medication administrations</button
-	>
-	<button on:click|once={getAllMedication}>Get all medication</button>
-	<button on:click|once={getAllAppointments}>Get all Appointments</button>
-	<button on:click|once={getAllImmunisations}>Get all Immunisations</button>
-	<button on:click|once={getAllConditions}>Get all Conditions</button>
-	<button on:click|once={getAllDiagnosticReports}>Get all Diagnostic Reports</button>
-	<button on:click|once={getAllSpecimens}>Get all Specimens</button>
+	<button on:click={getAllMedicationAdministrations}>Get all medication administrations</button>
+	<button on:click={getAllMedication}>Get all medication</button>
+	<button on:click={getAllAppointments}>Get all Appointments</button>
+	<button on:click={getAllImmunisations}>Get all Immunisations</button>
+	<button on:click={getAllConditions}>Get all Conditions</button>
+	<button on:click={getAllDiagnosticReports}>Get all Diagnostic Reports</button>
+	<button on:click={getAllSpecimens}>Get all Specimens</button>
 </div>
 
+<button on:click={clearConsole}>Clear console</button>
 <textarea bind:value={responseLog} readonly />
 
 <style>
 	textarea {
 		width: 100%;
 		height: 600px;
+		margin-top: 5px;
 	}
 
 	.buttonPanel {
