@@ -1,5 +1,6 @@
 <script>
 	let value = `Called Requests:\n\n`;
+	let searchName = 'Smith';
 
 	function getAllPatients() {
 		fetch('http://localhost:4444/Patients/allPatients')
@@ -13,13 +14,12 @@
 	}
 
 	function getPatient() {
-		fetch('http://localhost:4444/Patients/allPatients')
+		fetch('http://localhost:4444/Patients/paitent/' + searchName)
 			.then((response) => response.json())
 			.then((data) => {
-				console.log(data.entry);
-				let entry = 'Request for a Patients:\n';
-				entry += JSON.stringify(data.entry);
-				entry += '\n\n';
+				let entry = 'Request for a patient with the name "' + searchName + '":\n';
+				entry += stringifyResults(data.entry);
+
 				value += entry;
 			});
 	}
@@ -37,7 +37,10 @@
 <h1>FHIR Server Analytics</h1>
 <div class="buttonPanel">
 	<button on:click|once={getAllPatients}>Get all patients</button>
-	<button on:click|once={getPatient}>Get a patient</button>
+	<div>
+		<button on:click|once={getPatient}>Get a patient</button>
+		<label>Insert name: </label><input bind:value={searchName} />
+	</div>
 </div>
 
 <textarea bind:value readonly />
@@ -51,5 +54,11 @@
 	.buttonPanel {
 		padding-top: 2vh;
 		padding-bottom: 2vh;
+		display: flex;
+		flex-direction: column;
+	}
+
+	button {
+		width: 200px;
 	}
 </style>
