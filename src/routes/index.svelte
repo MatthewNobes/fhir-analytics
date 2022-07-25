@@ -26,12 +26,21 @@
 
 	function stringifyResults(results) {
 		let allResults = '';
-		debugger;
 		results.forEach((result, index) => {
 			allResults += 'Entry ' + index + ':' + JSON.stringify(result) + '\n\n';
 		});
 		return allResults;
 	}
+
+	const getAllMedication = () => {
+		fetch('http://localhost:4444/medication/')
+			.then((response) => response.json())
+			.then((data) => {
+				let entry = 'Request for all medication:\n';
+				entry += stringifyResults(data.entry);
+				value += entry;
+			});
+	};
 </script>
 
 <h1>FHIR Server Analytics</h1>
@@ -41,6 +50,7 @@
 		<button on:click|once={getPatient}>Get a patient</button>
 		<label>Insert name: </label><input bind:value={searchName} />
 	</div>
+	<button on:click|once={getAllMedication}>Get all medication</button>
 </div>
 
 <textarea bind:value readonly />
