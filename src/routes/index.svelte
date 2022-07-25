@@ -64,6 +64,16 @@
 				value += entry;
 			});
 	};
+
+	const getAllMedicationAdministrations = () => {
+		fetch('http://localhost:4444/medicationAdministrations/')
+			.then((response) => response.json())
+			.then((data) => {
+				let entry = 'Request for all Medication Administrations:\n';
+				entry += stringifyResults(data.entry);
+				value += entry;
+			});
+	};
 </script>
 
 <h1>FHIR Server Analytics</h1>
@@ -73,6 +83,8 @@
 		<button on:click|once={getPatient}>Get a patient</button>
 		<label>Insert name: </label><input bind:value={searchName} />
 	</div>
+	<button on:click|once={getAllMedicationAdministrations}>Get all medication administrations</button
+	>
 	<button on:click|once={getAllMedication}>Get all medication</button>
 	<button on:click|once={getAllAppointments}>Get all Appointments</button>
 	<button on:click|once={getAllImmunisations}>Get all Immunisations</button>
