@@ -34,6 +34,16 @@
 				value += entry;
 			});
 	};
+
+	const getAllAppointments = () => {
+		fetch('http://localhost:4444/appointments/')
+			.then((response) => response.json())
+			.then((data) => {
+				let entry = 'Request for all appointments:\n';
+				entry += stringifyResults(data.entry);
+				value += entry;
+			});
+	};
 </script>
 
 <h1>FHIR Server Analytics</h1>
@@ -44,6 +54,8 @@
 		<label>Insert name: </label><input bind:value={searchName} />
 	</div>
 	<button on:click|once={getAllMedication}>Get all medication</button>
+	<button on:click|once={getAllAppointments}>Get all Appointments</button>
+	<!---also need immunisations, medication administration, condsitions, diagnostic reprots, specimen (test result)-->
 </div>
 
 <textarea bind:value readonly />
