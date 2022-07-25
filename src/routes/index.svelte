@@ -63,5 +63,6 @@
 
 	button {
 		width: 200px;
+		margin-top: 5px;
 	}
 </style>
