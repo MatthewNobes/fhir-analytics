@@ -84,6 +84,16 @@
 				value += entry;
 			});
 	};
+
+	const getAllSpecimens = () => {
+		fetch('http://localhost:4444/specimens/')
+			.then((response) => response.json())
+			.then((data) => {
+				let entry = 'Request for all specimens:\n';
+				entry += stringifyResults(data.entry);
+				value += entry;
+			});
+	};
 </script>
 
 <h1>FHIR Server Analytics</h1>
@@ -100,7 +110,7 @@
 	<button on:click|once={getAllImmunisations}>Get all Immunisations</button>
 	<button on:click|once={getAllConditions}>Get all Conditions</button>
 	<button on:click|once={getAllDiagnosticReports}>Get all Diagnostic Reports</button>
-	<!---also need diagnostic reprots, specimen (test result)-->
+	<button on:click|once={getAllSpecimens}>Get all Specimens</button>
 </div>
 
 <textarea bind:value readonly />
