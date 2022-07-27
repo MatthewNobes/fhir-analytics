@@ -1,7 +1,16 @@
-export const stringifyResults = (results) => {
+export const stringifyResults = (
+	/** @type {{ entry: any; forEach: (arg0: (result: any, index: any) => void) => void; }} */ results
+) => {
+	console.log(results);
+
 	let allResults = '';
-	results.forEach((result, index) => {
-		allResults += 'Entry ' + index + ':' + JSON.stringify(result) + '\n\n';
-	});
+	if (Array.isArray(results.entry)) {
+		results.entry.forEach((result, index) => {
+			allResults += 'Entry ' + index + ':' + JSON.stringify(result) + '\n\n';
+		});
+	} else {
+		allResults = JSON.stringify(results);
+	}
+
 	return allResults;
 };

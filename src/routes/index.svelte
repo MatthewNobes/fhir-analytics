@@ -3,6 +3,7 @@
 
 	let responseLog = `Called Requests:\n\n`;
 	let searchName = 'Smith';
+	let searchAllID = 'dbb836b5-49b3-4c8b-9e1b-dcdd51a7de72';
 
 	const getAllPatients = async () => {
 		const requestTitle = '- Request for All Patients:\n';
@@ -58,6 +59,20 @@
 		responseLog += requestTitle + response;
 	};
 
+	const getAllPatientsDetails = async () => {
+		const requestTitle = `- Request for ${searchAllID} details:\n`;
+		const response = await apiRequest('Patients/all_data/' + searchAllID);
+		responseLog += requestTitle + response;
+
+		//get
+	};
+
+	const getAllFamilyHistory = async () => {
+		const requestTitle = `- Request for all Family History:\n`;
+		const response = await apiRequest('familyHistory');
+		responseLog += requestTitle + response;
+	};
+
 	const clearConsole = () => {
 		responseLog = `Called Requests:\n\n`;
 	};
@@ -71,11 +86,18 @@
 		<label htmlfor="patient-search-name">Insert name: </label>
 		<input id="patient-search-name" type="text" bind:value={searchName} />
 	</div>
+	<div>
+		<button on:click={getAllPatientsDetails}>Get all details for patients</button>
+		<label htmlfor="patient-search-id">Insert patient id: </label>
+		<input id="patient-search-id" type="text" bind:value={searchAllID} />
+	</div>
+
 	<button on:click={getAllMedicationAdministrations}>Get all medication administrations</button>
 	<button on:click={getAllMedication}>Get all medication</button>
 	<button on:click={getAllAppointments}>Get all Appointments</button>
 	<button on:click={getAllImmunisations}>Get all Immunisations</button>
 	<button on:click={getAllConditions}>Get all Conditions</button>
+	<button on:click={getAllFamilyHistory}>Get all Family History</button>
 	<button on:click={getAllDiagnosticReports}>Get all Diagnostic Reports</button>
 	<button on:click={getAllSpecimens}>Get all Specimens</button>
 </div>
