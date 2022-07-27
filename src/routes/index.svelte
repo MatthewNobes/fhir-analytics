@@ -4,6 +4,7 @@
 	let responseLog = `Called Requests:\n\n`;
 	let searchName = 'Smith';
 	let searchAllID = 'dbb836b5-49b3-4c8b-9e1b-dcdd51a7de72';
+	let specimensSearchID = 'dbb836b5-49b3-4c8b-9e1b-dcdd51a7de72';
 
 	const getAllPatients = async () => {
 		const requestTitle = '- Request for All Patients:\n';
@@ -59,6 +60,12 @@
 		responseLog += requestTitle + response;
 	};
 
+	const getPatientSpecimensForID = async () => {
+		const requestTitle = `- Request for ${specimensSearchID} specimens:\n`;
+		const response = await apiRequest('specimens/' + specimensSearchID);
+		responseLog += requestTitle + response;
+	};
+
 	const getAllPatientsDetails = async () => {
 		const requestTitle = `- Request for ${searchAllID} details:\n`;
 		const response = await apiRequest('Patients/all_data/' + searchAllID);
@@ -95,7 +102,7 @@
 	<div>
 		<button on:click={getAllPatientsDetails}>Get all details for patients</button>
 		<label htmlfor="patient-search-id">Insert patient id: </label>
-		<input id="patient-search-id" type="text" bind:value={searchAllID} />
+		<input id="patient-search-id" type="text" bind:value={specimensSearchID} />
 	</div>
 
 	<button on:click={getAllMedicationAdministrations}>Get all medication administrations</button>
@@ -105,7 +112,14 @@
 	<button on:click={getAllConditions}>Get all Conditions</button>
 	<button on:click={getAllFamilyHistory}>Get all Family History</button>
 	<button on:click={getAllDiagnosticReports}>Get all Diagnostic Reports</button>
-	<button on:click={getAllSpecimens}>Get all Specimens</button>
+
+	<div>
+		<button on:click={getAllSpecimens}>Get all Specimens</button>
+		<button on:click={getPatientSpecimensForID}>Get Specimens for patient ID</button>
+		<label htmlfor="patient-specimens-id">Insert patient id: </label>
+		<input id="patient-specimens-id" type="text" bind:value={searchAllID} />
+	</div>
+
 	<button on:click={getAllObservations}>Get all Observations</button>
 </div>
 
