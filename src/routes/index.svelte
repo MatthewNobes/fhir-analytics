@@ -6,6 +6,8 @@
 	let searchAllID = 'dbb836b5-49b3-4c8b-9e1b-dcdd51a7de72';
 	let specimensSearchID = 'dbb836b5-49b3-4c8b-9e1b-dcdd51a7de72';
 	let conditionsSearchID = 'dbb836b5-49b3-4c8b-9e1b-dcdd51a7de72';
+	let medicationAdministrationsSearchID = 'dbb836b5-49b3-4c8b-9e1b-dcdd51a7de72';
+	let familyHistorySearchID = 'dbb836b5-49b3-4c8b-9e1b-dcdd51a7de72';
 
 	const getAllPatients = async () => {
 		const requestTitle = '- Request for All Patients:\n';
@@ -69,7 +71,21 @@
 
 	const getPatientConditionsForID = async () => {
 		const requestTitle = `- Request for ${conditionsSearchID} conditions:\n`;
-		const response = await apiRequest('specimens/' + conditionsSearchID);
+		const response = await apiRequest('conditions/' + conditionsSearchID);
+		responseLog += requestTitle + response;
+	};
+
+	const getPatientMedicationAdministrationsForID = async () => {
+		const requestTitle = `- Request for ${medicationAdministrationsSearchID} Medication Administrations:\n`;
+		const response = await apiRequest(
+			'medicationAdministrations/' + medicationAdministrationsSearchID
+		);
+		responseLog += requestTitle + response;
+	};
+
+	const getPatientFamilyHistoryForID = async () => {
+		const requestTitle = `- Request for ${familyHistorySearchID} family history:\n`;
+		const response = await apiRequest('familyHistory/' + familyHistorySearchID);
 		responseLog += requestTitle + response;
 	};
 
@@ -111,9 +127,21 @@
 		<label htmlfor="patient-search-id">Insert patient id: </label>
 		<input id="patient-search-id" type="text" bind:value={specimensSearchID} />
 	</div>
-
-	<button on:click={getAllMedicationAdministrations}>Get all medication administrations</button>
 	<button on:click={getAllMedication}>Get all medication</button>
+
+	<div>
+		<button on:click={getAllMedicationAdministrations}>Get all medication administrations</button>
+		<button on:click={getPatientMedicationAdministrationsForID}
+			>Get Medication Administrations for patient ID</button
+		>
+		<label htmlfor="patient-medicationAdministrations-id">Insert patient id: </label>
+		<input
+			id="patient-medicationAdministrations-id"
+			type="text"
+			bind:value={medicationAdministrationsSearchID}
+		/>
+	</div>
+
 	<button on:click={getAllAppointments}>Get all Appointments</button>
 	<button on:click={getAllImmunisations}>Get all Immunisations</button>
 
@@ -123,7 +151,13 @@
 		<label htmlfor="patient-conditions-id">Insert patient id: </label>
 		<input id="patient-conditions-id" type="text" bind:value={conditionsSearchID} />
 	</div>
-	<button on:click={getAllFamilyHistory}>Get all Family History</button>
+	<div>
+		<button on:click={getAllFamilyHistory}>Get all Family History</button>
+		<button on:click={getPatientFamilyHistoryForID}>Get Family History for patient ID</button>
+		<label htmlfor="patient-familyHistory-id">Insert patient id: </label>
+		<input id="patient-familyHistory-id" type="text" bind:value={familyHistorySearchID} />
+	</div>
+
 	<button on:click={getAllDiagnosticReports}>Get all Diagnostic Reports</button>
 
 	<div>
