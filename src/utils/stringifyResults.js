@@ -1,8 +1,6 @@
 export const stringifyResults = (
 	/** @type {{ entry: any; forEach: (arg0: (result: any, index: any) => void) => void; }} */ results
 ) => {
-	console.log(results);
-
 	let allResults = '';
 	if (Array.isArray(results.entry)) {
 		results.entry.forEach((result, index) => {
