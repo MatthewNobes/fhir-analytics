@@ -73,6 +73,12 @@
 		responseLog += requestTitle + response;
 	};
 
+	const getAllObservations = async () => {
+		const requestTitle = `- Request for all Observations:\n`;
+		const response = await apiRequest('observations');
+		responseLog += requestTitle + response;
+	};
+
 	const clearConsole = () => {
 		responseLog = `Called Requests:\n\n`;
 	};
@@ -100,6 +106,7 @@
 	<button on:click={getAllFamilyHistory}>Get all Family History</button>
 	<button on:click={getAllDiagnosticReports}>Get all Diagnostic Reports</button>
 	<button on:click={getAllSpecimens}>Get all Specimens</button>
+	<button on:click={getAllObservations}>Get all Observations</button>
 </div>
 
 <button on:click={clearConsole}>Clear console</button>
