@@ -1,4 +1,8 @@
 import { apiRequest } from '../apiRequest';
+import { getPatientSpecimensForID } from './specimens';
+import { getPatientConditionsForID } from './conditions';
+import { getPatientMedicationAdministrationsForID } from './medication';
+import { getPatientFamilyHistoryForID } from './familyHistory';
 
 export const getAllPatients = async () => {
 	const requestTitle = '- Request for All Patients:\n';
@@ -14,8 +18,24 @@ export const getPatient = async (/** @type {string} */ searchName) => {
 
 export const getAllPatientsDetails = async (/** @type {string} */ searchAllID) => {
 	const requestTitle = `- Request for ${searchAllID} details:\n`;
-	const response = await apiRequest('Patients/all_data/' + searchAllID);
-	return requestTitle + response;
+	const patientBasic = await apiRequest('Patients/all_data/' + searchAllID);
+	const patientSpecimens = await getPatientSpecimensForID(searchAllID);
+	const patientFamilyHistory = await getPatientFamilyHistoryForID(searchAllID);
+	const patientConditions = await getPatientConditionsForID(searchAllID);
+	const patientMedicationAdministrations = await getPatientMedicationAdministrationsForID(
+		searchAllID
+	);
+	const response =
+		patientBasic +
+		'\n' +
+		patientSpecimens +
+		'\n' +
+		patientFamilyHistory +
+		'\n' +
+		patientConditions +
+		'\n' +
+		patientMedicationAdministrations;
+	return requestTitle + response + '\n' + patientSpecimens;
 
 	//get
 };
